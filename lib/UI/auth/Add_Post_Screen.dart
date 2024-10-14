@@ -15,7 +15,7 @@ class AddPost extends StatefulWidget {
 class _AddPostState extends State<AddPost> {
   final postController = TextEditingController();
   bool Loding = false; //
-  final databaseRif = FirebaseDatabase.instance.ref('path');
+  final databaseRif = FirebaseDatabase.instance.ref('Post');
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +53,9 @@ class _AddPostState extends State<AddPost> {
                         setState(() {
                           Loding = true;
                         });
-                        databaseRif.child('2').set({
-                          "Title ": postController.text.toString(),
-                          "ID ": 1,
+                        databaseRif.child(DateTime.now().millisecondsSinceEpoch.toString()).child('Comments').set({
+                          "  Title ": postController.text.toString(),
+                          "ID ":DateTime.now().millisecondsSinceEpoch.toString(),
                         }).then((value) {
                           Utllis().tostMassage('Post Edit ');
                           setState(() {
